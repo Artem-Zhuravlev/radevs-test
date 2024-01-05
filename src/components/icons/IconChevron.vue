@@ -24,7 +24,7 @@ export default {
       type: String,
       default: 'left',
       validator(value) {
-        ['left', 'right'].includes(value);
+        return ['left', 'right'].includes(value);
       },
     },
   },
