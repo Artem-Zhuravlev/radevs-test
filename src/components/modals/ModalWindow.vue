@@ -50,25 +50,57 @@ export default {
       type: Boolean,
       default: false,
     },
+    escClose: {
+      type: Boolean,
+      default: true,
+    },
+    backdropClose: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
     localValue: {
       get() {
+        document.addEventListener('keyup', this.onEscPress);
         return this.value;
       },
       set(value) {
+        if (!value) {
+          document.removeEventListener('keyup', this.onEscPress);
+        }
+
         this.$emit('input', value);
       },
     },
   },
   methods: {
+    // backdrop click method
     onBackdropClick() {
-      this.localValue = false;
-    },
-    onEscKey(event) {
-      if (event.key === 'Escape') {
-        this.localValue = false;
+      const { backdropClose } = this;
+      if (!backdropClose) {
+        return;
       }
+
+      this.hide('onBackdropClick');
+    },
+
+    // esc click method
+    onEscPress({ keyCode }) {
+      const { escClose } = this;
+      if (!escClose) {
+        return;
+      }
+
+      if (keyCode === 27) {
+        this.hide('onEscClick');
+      }
+    },
+
+    // method for hiding modal window
+    hide(closeType = null) {
+      this.$emit('onClose', closeType);
+      this.localValue = false;
     },
   },
 };
