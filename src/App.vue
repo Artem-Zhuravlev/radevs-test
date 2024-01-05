@@ -1,29 +1,34 @@
 <template>
   <div id="app">
-    <icon-chevron />
     <button-base
-      is-active
+      @click="visible = true"
     >
-      Today
+      Open {{ visible }}
     </button-base>
-    <button-base>
-      <icon-chevron />
-    </button-base>
-    <button-base disabled>
-      <icon-chevron />
-    </button-base>
+    <modal-window
+      v-model="visible"
+      title="Some title"
+    >
+      Some content
+    </modal-window>
   </div>
 </template>
 
 <script>
-import IconChevron from '@/components/icons/IconChevron.vue';
 import ButtonBase from '@/components/buttons/ButtonBase.vue';
+import ModalWindow from '@/components/modals/ModalWindow.vue';
 
 export default {
   name: 'App',
   components: {
-    IconChevron,
+    ModalWindow,
     ButtonBase,
+  },
+
+  data() {
+    return {
+      visible: false,
+    };
   },
 };
 </script>
