@@ -1,13 +1,17 @@
 <template>
   <div id="app">
-    inital
+    <icon-chevron />
   </div>
 </template>
 
 <script>
+import IconChevron from '@/components/icons/IconChevron.vue';
 
 export default {
   name: 'App',
+  components: {
+    IconChevron,
+  },
 };
 </script>
 
