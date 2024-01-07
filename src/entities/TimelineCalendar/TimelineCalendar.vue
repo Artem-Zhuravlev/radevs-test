@@ -1,5 +1,6 @@
 <template>
   <div class="timeline">
+    <timeline-nav />
     <timeline-header
       :items="week"
     />
@@ -14,12 +15,14 @@
 <script>
 import TimelineHeader from './common/TimelineHeader.vue';
 import TimelineRow from './common/TimelineRow.vue';
+import TimelineNav from './common/TimelineNav.vue';
 
 export default {
   name: 'TimelineCalendar',
   components: {
     TimelineHeader,
     TimelineRow,
+    TimelineNav,
   },
   data() {
     return {
