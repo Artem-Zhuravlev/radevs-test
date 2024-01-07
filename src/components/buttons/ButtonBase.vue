@@ -56,8 +56,7 @@ export default {
 @import '@/styles/mixins';
 .button-base {
   @include center;
-  min-width: var(--size-small);
-  min-height: var(--size-small);
+  @include min-size(var(--size-small));
   padding: var(--space-small) var(--space-medium);
   border-radius: var(--space-extra-small);
   cursor: pointer;

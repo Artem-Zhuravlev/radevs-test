@@ -7,3 +7,15 @@
   align-items: center;
   justify-content: center;
 }
+
+// Mixin: Minimum Size
+// This mixin sets the minimum size for an element.
+//
+// @example
+//   @include min-size(20px);
+//
+// @param {value} $size - The minimum size value for both width and height.
+@mixin min-size($size) {
+  min-width: $size;
+  min-height: $size;
+}
