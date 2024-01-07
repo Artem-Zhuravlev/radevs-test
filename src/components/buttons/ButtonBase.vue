@@ -2,9 +2,9 @@
   <button
     :type="buttonType"
     class="button-base"
-    :class="{
+    :class="[{
       'active': isActive,
-    }"
+    },variant]"
     :disabled="disabled"
     @click="onClick"
   >
@@ -31,6 +31,13 @@ export default {
       type: Boolean,
       default: false,
     },
+    variant: {
+      type: String,
+      default: 'primary',
+      validator(value) {
+        return ['primary', 'secondary'].includes(value);
+      },
+    },
   },
   methods: {
     onClick() {
@@ -46,27 +53,48 @@ export default {
   lang="scss"
   scoped
 >
+@import '@/styles/mixins';
 .button-base {
-  display: flex;
-  align-items: center;
-  min-width: 35px;
-  min-height: 35px;
+  @include center;
+  min-width: var(--size-small);
+  min-height: var(--size-small);
   padding: var(--space-small) var(--space-medium);
-  background-color: var(--color-primary);
-  color: var(--color-light);
   border-radius: var(--space-extra-small);
   cursor: pointer;
   border: none;
-  transition: var(--transition-bg);
 
-  &:hover:not(:disabled) {
-    background-color: var(--color-primary-hover);
+  &.primary {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    transition: var(--transition-bg);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-primary-hover);
+    }
+
+    &:focus,
+    &.active {
+      background-color: var(--color-primary-focus);
+    }
   }
 
-  &:focus,
-  &.active {
+  &.secondary {
+    background-color: var(--color-text);
+    color: var(--color-white);
+    transition: var(--transition-opacity);
+
+    &:hover:not(:disabled) {
+      opacity: 0.8;
+    }
+
+    &:focus,
+    &.active {
+      opacity: 0.7;
+    }
+  }
+
+  &:focus {
     outline: transparent;
-    background-color: var(--color-primary-focus);
   }
 
   &[disabled] {

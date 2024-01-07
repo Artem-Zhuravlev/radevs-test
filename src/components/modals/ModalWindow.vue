@@ -138,7 +138,7 @@ export default {
 
   &__footer {
     padding: var(--space-medium);
-    border-top: 1px solid var(--color-border);
+    border-top: var(--border);
   }
 }
 </style>

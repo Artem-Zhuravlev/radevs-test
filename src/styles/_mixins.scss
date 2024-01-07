@@ -1,0 +1,9 @@
+// Mixin: Center Alignment
+// This mixin is used for center alignment of elements.
+/// @example @include center;
+
+@mixin center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -12,9 +12,13 @@
   --color-backdrop: rgba(0, 0, 0, .45);
 
   // spaces
+  --space-extra-small: 0.5rem;
   --space-small: 1rem;
   --space-medium: 1.5rem;
-  --space-extra-small: 0.5rem;
+  --space-big: 2rem;
+  --space-extra-big: 5rem;
+  --size-small: 3.5rem;
+  
 
   // font size
   --header-size: 2.4rem;
@@ -24,4 +28,8 @@
 
   // transitions
   --transition-bg: 0.3s ease background-color;
+  --transition-opacity: 0.3s ease opacity;
+
+  // border
+  --border: 1px solid var(--color-border);
 }
