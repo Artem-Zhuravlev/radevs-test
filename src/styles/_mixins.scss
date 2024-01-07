@@ -19,3 +19,17 @@
   min-width: $size;
   min-height: $size;
 }
+
+
+// Mixin: List Reset
+// This mixin resets styles for unordered and ordered lists.
+//
+// @example
+//   @include list-reset();
+//
+
+@mixin list-reset() {
+  margin: 0;
+  list-style: none;
+  padding-left: 0;
+}

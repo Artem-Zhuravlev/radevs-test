@@ -39,6 +39,7 @@ export default {
   lang="scss"
   scoped
 >
+@import '@/styles/mixins';
 .timeline {
   &__nav {
     margin-bottom: var(--space-medium);
@@ -46,8 +47,7 @@ export default {
   &__list {
     display: flex;
     gap: var(--space-medium);
-    list-style: none;
-    padding-left: 0;
+    @include list-reset();
   }
 }
 </style>
