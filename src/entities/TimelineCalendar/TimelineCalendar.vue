@@ -1,6 +1,11 @@
 <template>
   <div class="timeline">
-    <timeline-nav />
+    <timeline-nav
+      @prev="prevWeek"
+      @next="nextWeek"
+      @today="presentWeek"
+    />
+    {{ today }}
     <timeline-header
       :items="week"
     />
@@ -13,6 +18,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import TimelineHeader from './common/TimelineHeader.vue';
 import TimelineRow from './common/TimelineRow.vue';
 import TimelineNav from './common/TimelineNav.vue';
@@ -24,18 +30,23 @@ export default {
     TimelineRow,
     TimelineNav,
   },
-  data() {
-    return {
-      week: [
-        '2023-12-24',
-        '2023-12-25',
-        '2023-12-26',
-        '2023-12-27',
-        '2023-12-28',
-        '2023-12-29',
-        '2023-12-30',
-      ],
-    };
+  created() {
+    this.setCurrentWeek(this.today);
+  },
+  computed: {
+    ...mapState('calendarNav', [
+      'currentWeek',
+      'week',
+      'today',
+    ]),
+  },
+  methods: {
+    ...mapActions('calendarNav', [
+      'setCurrentWeek',
+      'prevWeek',
+      'nextWeek',
+      'presentWeek',
+    ]),
   },
 };
 </script>

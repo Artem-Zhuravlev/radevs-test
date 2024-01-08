@@ -2,19 +2,25 @@
   <nav class="timeline__nav">
     <ul class="timeline__list">
       <li class="timeline__item">
-        <button-base>
+        <button-base
+          @click="$emit('prev')"
+        >
           <icon-chevron />
         </button-base>
       </li>
       <li class="timeline__item">
-        <button-base>
+        <button-base
+          @click="$emit('next')"
+        >
           <icon-chevron
             direction="right"
           />
         </button-base>
       </li>
       <li class="timeline__item">
-        <button-base>
+        <button-base
+          @click="$emit('today')"
+        >
           Today
         </button-base>
       </li>
