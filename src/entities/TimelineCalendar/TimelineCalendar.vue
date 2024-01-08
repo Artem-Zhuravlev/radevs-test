@@ -19,6 +19,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { getBookingList } from '@/http';
 import TimelineHeader from './common/TimelineHeader.vue';
 import TimelineRow from './common/TimelineRow.vue';
 import TimelineNav from './common/TimelineNav.vue';
@@ -30,8 +31,11 @@ export default {
     TimelineRow,
     TimelineNav,
   },
-  created() {
+  async created() {
     this.setCurrentWeek(this.today);
+
+    const d = await getBookingList();
+    console.log(d);
   },
   computed: {
     ...mapState('calendarNav', [
