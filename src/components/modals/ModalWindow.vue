@@ -115,6 +115,7 @@ export default {
   display: grid;
   place-items: center;
   top: 0;
+  left: 0;
   min-width: 100vw;
   min-height: 100dvh;
   background-color: var(--color-backdrop);

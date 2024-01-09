@@ -16,6 +16,10 @@
         @show-info="handleShowInfo"
       />
     </div>
+    <timeline-modal
+      v-model="showUserModal"
+      :item="userInfo"
+    />
   </div>
 </template>
 
@@ -24,6 +28,7 @@ import { mapState, mapActions } from 'vuex';
 import TimelineHeader from './common/TimelineHeader.vue';
 import TimelineRow from './common/TimelineRow.vue';
 import TimelineNav from './common/TimelineNav.vue';
+import TimelineModal from './common/TimelineModal.vue';
 
 export default {
   name: 'TimelineCalendar',
@@ -31,6 +36,7 @@ export default {
     TimelineHeader,
     TimelineRow,
     TimelineNav,
+    TimelineModal,
   },
   async created() {
     this.setCurrentWeek(this.today);
@@ -39,6 +45,7 @@ export default {
   data() {
     return {
       userInfo: null,
+      showUserModal: false,
     };
   },
   computed: {
@@ -83,7 +90,8 @@ export default {
       'fetch',
     ]),
     handleShowInfo(id) {
-      this.userInfo = this.bookingRangeList.filter((item) => item.id === id);
+      this.userInfo = this.bookingRangeList.find((item) => item.id === id);
+      this.showUserModal = true;
     },
   },
 };
