@@ -76,7 +76,10 @@ export default {
     },
   },
   methods: {
-    // backdrop click method
+    /**
+     * Handles the backdrop click event and hides the component if backdropClose is enabled.
+     * @returns {void}
+    */
     onBackdropClick() {
       const { backdropClose } = this;
       if (!backdropClose) {
@@ -86,7 +89,11 @@ export default {
       this.hide('onBackdropClick');
     },
 
-    // esc click method
+    /**
+     * Handles the key press event for the 'Esc' key and hides the component if escClose is enabled.
+     * @param {Object} event - The key press event object.
+     * @returns {void}
+    */
     onEscPress({ keyCode }) {
       const { escClose } = this;
       if (!escClose) {
@@ -98,7 +105,11 @@ export default {
       }
     },
 
-    // method for hiding modal window
+    /**
+     * Hides the component and emits an 'onClose' event with an optional close type.
+     * @param {string|null} closeType - The type of close event (optional).
+     * @returns {void}
+    */
     hide(closeType = null) {
       this.$emit('onClose', closeType);
       this.localValue = false;

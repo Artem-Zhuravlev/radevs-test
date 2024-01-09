@@ -58,6 +58,10 @@ export default {
       'week',
       'startOfCurrentWeek',
     ]),
+    /**
+     * Filters booking data by week.
+     * @returns {Array} Filtered booking data.
+    */
     bookingRangeList() {
       if (!this.bookingList || this.bookingList.length === 0) {
         return [];
@@ -66,6 +70,10 @@ export default {
       return this.bookingList.filter((item) => this.week.includes(item?.start)
         || this.week.includes(item?.end));
     },
+    /**
+     * Gets a list of unique hotels.
+     * @returns {Array} List of unique hotel names.
+    */
     hotelsList() {
       if (!this.bookingList || this.bookingList.length === 0) {
         return [];
@@ -73,6 +81,10 @@ export default {
 
       return [...new Set(this.bookingList.map((item) => item?.roomDetails?.name))];
     },
+    /**
+     * Gets formatted data with titles and corresponding booking data.
+     * @returns {Array} Formatted booking data.
+    */
     bookingFormatData() {
       return this.hotelsList.map((item) => ({
         title: item,
@@ -90,10 +102,19 @@ export default {
     ...mapActions('fetchCalendar', [
       'fetch',
     ]),
+    /**
+     * Displays user information in a modal based on the provided user ID.
+     * @param {number} id - The ID of the user to display information for.
+     * @returns {void}
+    */
     showUserInfo(id) {
       this.userInfo = this.bookingRangeList.find((item) => item.id === id);
       this.showUserModal = true;
     },
+    /**
+     * Resets user information, clearing the stored user data.
+     * @returns {void}
+    */
     resetUserInfo() {
       this.userInfo = null;
     },

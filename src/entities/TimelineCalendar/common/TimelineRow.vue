@@ -49,16 +49,29 @@ export default {
     ]),
   },
   methods: {
+    /**
+     * Calculates the number of days between the provided start and end dates.
+     * @param {string} start - The start date of the booking.
+     * @param {string} end - The end date of the booking.
+     * @returns {number} The number of days in the booking period.
+    */
     getBookingPeriod(start, end) {
       const startDate = moment(start);
       const endDate = moment(end);
-      return endDate.diff(startDate, 'days');
+      return endDate?.diff(startDate, 'days');
     },
+    /**
+     * Calculates the number of days between the provided start date and
+     * the current week's start date.
+     * @param {string} start - The start date of the booking.
+     * @returns {number} The number of days between the start date and the
+     * current week's start date.
+    */
     getBookingOffset(start) {
       const startDate = moment(start);
       const currentWeek = moment(this.currentWeek);
 
-      return startDate.diff(currentWeek, 'days');
+      return startDate?.diff(currentWeek, 'days');
     },
   },
 };

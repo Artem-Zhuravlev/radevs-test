@@ -40,6 +40,10 @@ export default {
     },
   },
   methods: {
+    /**
+     * Handles the click event, emits a 'click' event if not disabled.
+     * @returns {void}
+    */
     onClick() {
       if (this.disabled) { return; }
 
