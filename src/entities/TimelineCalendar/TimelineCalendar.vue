@@ -13,13 +13,13 @@
         v-for="(item, index) in bookingFormatData"
         :key="index"
         :row-data="item"
-        @show-info="handleShowInfo"
+        @show-info="showUserInfo"
       />
     </div>
     <timeline-modal
       v-model="showUserModal"
       :item="userInfo"
-      @onClose="handleHideInfo"
+      @onClose="resetUserInfo"
     />
   </div>
 </template>
@@ -90,11 +90,11 @@ export default {
     ...mapActions('fetchCalendar', [
       'fetch',
     ]),
-    handleShowInfo(id) {
+    showUserInfo(id) {
       this.userInfo = this.bookingRangeList.find((item) => item.id === id);
       this.showUserModal = true;
     },
-    handleHideInfo() {
+    resetUserInfo() {
       this.userInfo = null;
     },
   },
