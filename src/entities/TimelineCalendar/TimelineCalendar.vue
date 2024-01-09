@@ -19,6 +19,7 @@
     <timeline-modal
       v-model="showUserModal"
       :item="userInfo"
+      @onClose="handleHideInfo"
     />
   </div>
 </template>
@@ -92,6 +93,9 @@ export default {
     handleShowInfo(id) {
       this.userInfo = this.bookingRangeList.find((item) => item.id === id);
       this.showUserModal = true;
+    },
+    handleHideInfo() {
+      this.userInfo = null;
     },
   },
 };

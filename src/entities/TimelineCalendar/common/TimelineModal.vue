@@ -3,6 +3,7 @@
     v-model="localValue"
     :title="item?.name"
     class="timeline__modal"
+    @onClose="onCloseModal"
   >
     <ul class="timeline-contacts">
       <li
@@ -76,6 +77,11 @@ export default {
       set(value) {
         this.$emit('input', value);
       },
+    },
+  },
+  methods: {
+    onCloseModal(type) {
+      this.$emit('onClose', type);
     },
   },
 };

@@ -59,17 +59,18 @@ export default {
       default: true,
     },
   },
+  mounted() {
+    document.addEventListener('keyup', this.onEscPress);
+  },
+  beforeDestroy() {
+    document.removeEventListener('keyup', this.onEscPress);
+  },
   computed: {
     localValue: {
       get() {
-        document.addEventListener('keyup', this.onEscPress);
         return this.value;
       },
       set(value) {
-        if (!value) {
-          document.removeEventListener('keyup', this.onEscPress);
-        }
-
         this.$emit('input', value);
       },
     },

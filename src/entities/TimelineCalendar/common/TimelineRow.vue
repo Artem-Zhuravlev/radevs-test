@@ -39,7 +39,7 @@ export default {
   },
   props: {
     rowData: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },
