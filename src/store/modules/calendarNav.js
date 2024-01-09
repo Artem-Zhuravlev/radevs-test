@@ -9,7 +9,8 @@ const generateWeekArray = (date) => Array.from(
 );
 
 const state = {
-  today: moment().startOf('week').format(SYSTEM_FORMAT),
+  today: moment().format(SYSTEM_FORMAT),
+  startOfCurrentWeek: moment().startOf('week').format(SYSTEM_FORMAT),
   currentWeek: '',
   week: Array.from({ length: 7 }, () => ''),
 };
@@ -45,7 +46,7 @@ const actions = {
   },
   // switch to present week
   presentWeek({ state, dispatch }) {
-    dispatch('setCurrentWeek', state.today);
+    dispatch('setCurrentWeek', state.startOfCurrentWeek);
   },
 };
 

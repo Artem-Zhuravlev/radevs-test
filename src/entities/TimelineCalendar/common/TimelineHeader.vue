@@ -3,6 +3,9 @@
     <div class="timeline__days">
       <div
         class="timeline__day"
+        :class="{
+          'timeline__day--active': item === today
+        }"
         v-for="(item, index) in items"
         :key="index"
       >
@@ -13,6 +16,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'TimelineHeader',
   props: {
@@ -20,6 +25,11 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  computed: {
+    ...mapState('calendarNav', [
+      'today',
+    ]),
   },
 };
 </script>
@@ -44,6 +54,10 @@ export default {
     @include center;
     border-left: var(--border);
     height: var(--space-extra-big);
+
+    &--active {
+      background-color: var(--color-info);
+    }
   }
 }
 </style>

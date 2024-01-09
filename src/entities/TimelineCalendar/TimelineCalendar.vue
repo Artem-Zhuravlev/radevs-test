@@ -40,7 +40,7 @@ export default {
     TimelineModal,
   },
   async created() {
-    this.setCurrentWeek(this.today);
+    this.setCurrentWeek(this.startOfCurrentWeek);
     await this.fetch();
   },
   data() {
@@ -56,7 +56,7 @@ export default {
     ...mapState('calendarNav', [
       'currentWeek',
       'week',
-      'today',
+      'startOfCurrentWeek',
     ]),
     bookingRangeList() {
       if (!this.bookingList || this.bookingList.length === 0) {
