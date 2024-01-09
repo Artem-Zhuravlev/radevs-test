@@ -5,13 +5,15 @@
       @next="nextWeek"
       @today="presentWeek"
     />
-    {{ today }}
     <timeline-header
       :items="week"
     />
     <div class="timeline__body">
       <timeline-row
-        title="Premier Suite"
+        v-for="(item, index) in bookingFormatData"
+        :key="index"
+        :row-data="item"
+        @show-info="handleShowInfo"
       />
     </div>
   </div>
@@ -19,7 +21,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { getBookingList } from '@/http';
 import TimelineHeader from './common/TimelineHeader.vue';
 import TimelineRow from './common/TimelineRow.vue';
 import TimelineNav from './common/TimelineNav.vue';
@@ -33,16 +34,43 @@ export default {
   },
   async created() {
     this.setCurrentWeek(this.today);
-
-    const d = await getBookingList();
-    console.log(d);
+    await this.fetch();
+  },
+  data() {
+    return {
+      userInfo: null,
+    };
   },
   computed: {
+    ...mapState('fetchCalendar', [
+      'bookingList',
+    ]),
     ...mapState('calendarNav', [
       'currentWeek',
       'week',
       'today',
     ]),
+    bookingRangeList() {
+      if (!this.bookingList || this.bookingList.length === 0) {
+        return [];
+      }
+
+      return this.bookingList.filter((item) => this.week.includes(item?.start)
+        || this.week.includes(item?.end));
+    },
+    hotelsList() {
+      if (!this.bookingList || this.bookingList.length === 0) {
+        return [];
+      }
+
+      return [...new Set(this.bookingList.map((item) => item?.roomDetails?.name))];
+    },
+    bookingFormatData() {
+      return this.hotelsList.map((item) => ({
+        title: item,
+        data: this.bookingRangeList.filter((el) => el?.roomDetails?.name === item),
+      })).sort((a, b) => a.title.localeCompare(b.title));
+    },
   },
   methods: {
     ...mapActions('calendarNav', [
@@ -51,6 +79,12 @@ export default {
       'nextWeek',
       'presentWeek',
     ]),
+    ...mapActions('fetchCalendar', [
+      'fetch',
+    ]),
+    handleShowInfo(id) {
+      this.userInfo = this.bookingRangeList.filter((item) => item.id === id);
+    },
   },
 };
 </script>
